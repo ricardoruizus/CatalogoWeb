@@ -150,10 +150,16 @@ a:hover { color: var(--cyan-bright); }
   * { transition: none !important; }
 }
 
-.footer {
-  background-color: var(--bg-base);
-  color: var(--text-secondary);
-  border-top: 1px solid var(--divider);
+.footer, .footer.text-muted {
+  background-color: var(--bg-base) !important;
+  color: var(--text-secondary) !important;
+  border-top: 1px solid var(--divider) !important;
+}
+.footer a {
+  color: var(--cyan);
+}
+.footer a:hover {
+  color: var(--cyan-bright);
 }
 .navbar-nav .nav-link {
   padding: 0.45rem 1rem !important;
@@ -178,3 +184,14 @@ a:hover { color: var(--cyan-bright); }
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245,245,247,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
+
+.navbar-nav .nav-link {
+  color: var(--text-secondary) !important;
+}
+.navbar-nav .nav-link:hover {
+  color: var(--text-primary) !important;
+}
+.navbar-nav .nav-link.active {
+  color: var(--cyan) !important;
+}
+
