@@ -1,0 +1,180 @@
+:root {
+  --bg-base: #000000;
+  --bg-surface: #1c1c1e;
+  --bg-surface-2: #2c2c2e;
+  --cyan: #32ADE6;
+  --cyan-bright: #00d8ff;
+  --text-primary: #f5f5f7;
+  --text-secondary: #98989d;
+  --divider: rgba(255, 255, 255, 0.08);
+  --radius-card: 18px;
+  --radius-pill: 980px;
+}
+
+html { color-scheme: dark; } /* selects, scrollbars y date pickers nativos en oscuro */
+
+html, body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; }
+.lead { color: var(--text-secondary); font-weight: 400; }
+
+a { color: var(--cyan); text-decoration: none; }
+a:hover { color: var(--cyan-bright); }
+
+/* Navbar — efecto vidrio esmerilado, el elemento firma del diseño */
+.navbar, .navbar.bg-white {
+  background-color: rgba(28, 28, 30, 0.72) !important;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+}
+.navbar-brand, .nav-link.text-dark { color: var(--text-primary) !important; }
+.nav-link.text-dark:hover, .nav-link.active { color: var(--cyan) !important; }
+
+/* Cards (usadas en Estadísticas) */
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card);
+  box-shadow: none;
+}
+.card-title {
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.display-6 { color: var(--text-primary); font-weight: 700; }
+
+/* Tabla del catálogo */
+.table {
+  --bs-table-bg: transparent;
+  color: var(--text-primary);
+  border-color: var(--divider);
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+.table-hover > tbody > tr:hover > * { background-color: var(--bg-surface-2); }
+.table thead th {
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--divider);
+}
+
+/* Botones minimalistas tipo pill */
+.btn {
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  padding: 0.55rem 1.4rem;
+  border: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.btn:active { transform: scale(0.96); }
+.btn-sm { padding: 0.35rem 0.9rem; font-size: 13px; }
+
+.btn-primary, .btn-success {
+  background-color: var(--cyan);
+  color: #001016;
+}
+.btn-primary:hover, .btn-success:hover { background-color: var(--cyan-bright); color: #001016; }
+
+.btn-secondary {
+  background-color: var(--bg-surface-2);
+  color: var(--text-primary);
+  border: 1px solid var(--divider);
+}
+
+.btn-outline-primary, .btn-outline-success {
+  background-color: transparent;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+}
+.btn-outline-primary:hover, .btn-outline-success:hover { background-color: var(--cyan); color: #001016; }
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--divider);
+}
+.btn-outline-secondary:hover { background-color: var(--bg-surface-2); color: var(--text-primary); }
+
+.btn-outline-danger { background-color: transparent; color: #ff6961; border: 1px solid #ff6961; }
+.btn-outline-danger:hover { background-color: #ff6961; color: #1c0000; }
+
+/* Badges de estado (Vista / Pendiente) */
+.badge.bg-success { background-color: var(--cyan) !important; color: #001016 !important; }
+.badge.bg-warning {
+  background-color: var(--bg-surface-2) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--divider);
+}
+
+/* Formularios */
+.form-control, .form-select {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--divider);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 0.6rem 0.9rem;
+}
+.form-control:focus, .form-select:focus {
+  background-color: var(--bg-surface);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(50, 173, 230, 0.25);
+  color: var(--text-primary);
+}
+.form-label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Accesibilidad: foco visible y respeto a "reducir movimiento" */
+.btn:focus-visible, a:focus-visible, .form-control:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+.footer {
+  background-color: var(--bg-base);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--divider);
+}
+.navbar-nav .nav-link {
+  padding: 0.45rem 1rem !important;
+  border-radius: var(--radius-pill);
+  margin: 0 0.15rem;
+  font-weight: 500;
+}
+.navbar-nav .nav-link.active {
+  background-color: rgba(50, 173, 230, 0.16);
+  color: var(--cyan) !important;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 19px;
+}
+
+/* El ícono de hamburguesa por defecto es oscuro; lo recoloreamos para que se vea sobre fondo negro */
+.navbar-toggler {
+  border: 1px solid var(--divider);
+}
+.navbar-toggler:focus { box-shadow: 0 0 0 3px rgba(50, 173, 230, 0.25); }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245,245,247,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}

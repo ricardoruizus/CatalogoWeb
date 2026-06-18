@@ -1,0 +1,29 @@
+@model Contenido
+@{ ViewData["Title"] = "Editar contenido"; }
+
+<h1 class="mb-4">Editar contenido</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Editar" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3"><label class="form-label">Título</label><input asp-for="Titulo" class="form-control" /></div>
+    <div class="mb-3"><label class="form-label">Tipo</label>
+        <select asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoContenido>()" class="form-select"></select>
+    </div>
+    <div class="mb-3"><label class="form-label">Género</label><input asp-for="Genero" class="form-control" /></div>
+    <div class="mb-3"><label class="form-label">Año de estreno</label><input asp-for="AnioEstreno" type="number" class="form-control" /></div>
+    <div class="mb-3"><label class="form-label">Plataforma</label><input asp-for="Plataforma" class="form-control" /></div>
+    <div class="mb-3"><label class="form-label">Estado</label>
+        <select asp-for="Estado" asp-items="Html.GetEnumSelectList<EstadoContenido>()" class="form-select"></select>
+    </div>
+    <div class="mb-3"><label class="form-label">Calificación (1-5)</label>
+        <select asp-for="Calificacion" class="form-select">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option>
+        </select>
+    </div>
+    <div class="mb-3"><label class="form-label">Reseña breve</label><textarea asp-for="Resena" class="form-control" rows="3"></textarea></div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

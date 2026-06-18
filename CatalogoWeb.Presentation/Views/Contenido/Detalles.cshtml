@@ -1,0 +1,16 @@
+@model Contenido
+@{ ViewData["Title"] = "Detalles"; }
+
+<h1 class="mb-4">@Model.Titulo</h1>
+<dl class="row">
+    <dt class="col-sm-3">Tipo</dt><dd class="col-sm-9">@Model.Tipo</dd>
+    <dt class="col-sm-3">Género</dt><dd class="col-sm-9">@Model.Genero</dd>
+    <dt class="col-sm-3">Año de estreno</dt><dd class="col-sm-9">@Model.AnioEstreno</dd>
+    <dt class="col-sm-3">Plataforma</dt><dd class="col-sm-9">@Model.Plataforma</dd>
+    <dt class="col-sm-3">Estado</dt><dd class="col-sm-9">@Model.Estado</dd>
+    <dt class="col-sm-3">Calificación</dt><dd class="col-sm-9">@Model.Calificacion / 5</dd>
+    <dt class="col-sm-3">Reseña</dt><dd class="col-sm-9">@Model.Resena</dd>
+</dl>
+
+<a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver al catálogo</a>

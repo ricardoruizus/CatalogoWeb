@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CatalogoWeb.Business/CatalogoWeb.Business.csproj" />
+  <Project Path="CatalogoWeb.Data/CatalogoWeb.Data.csproj" />
+  <Project Path="CatalogoWeb.Entities/CatalogoWeb.Entities.csproj" />
+  <Project Path="CatalogoWeb.Presentation/CatalogoWeb.Presentation.csproj" />
+</Solution>

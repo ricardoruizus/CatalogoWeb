@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CatalogoWeb.Business\CatalogoWeb.Business.csproj" />
+    <ProjectReference Include="..\CatalogoWeb.Entities\CatalogoWeb.Entities.csproj" />
+    <ProjectReference Include="..\CatalogoWeb.Data\CatalogoWeb.Data.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
