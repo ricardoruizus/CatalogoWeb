@@ -31,8 +31,11 @@ namespace CatalogoWeb.Business
             if (tipo.HasValue)
                 resultado = resultado.Where(c => c.Tipo == tipo.Value).ToList();
 
-            if (!string.IsNullOrWhiteSpace(genero))
-                resultado = resultado.Where(c => c.Genero.Equals(genero, StringComparison.OrdinalIgnoreCase)).ToList();
+            // CORRECCIÓN AQUÍ: Convertimos de forma segura el string 'genero' al Enum 'GeneroContenido'
+            if (!string.IsNullOrWhiteSpace(genero) && Enum.TryParse<GeneroContenido>(genero, true, out var generoEnum))
+            {
+                resultado = resultado.Where(c => c.Genero == generoEnum).ToList();
+            }
 
             return resultado;
         }

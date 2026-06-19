@@ -5,24 +5,54 @@
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="Crear" method="post">
-    <div class="mb-3"><label class="form-label">Título</label><input asp-for="Titulo" class="form-control" /></div>
-    <div class="mb-3"><label class="form-label">Tipo</label>
+    <div class="mb-3">
+        <label class="form-label">Título</label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tipo</label>
         <select asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoContenido>()" class="form-select"></select>
+        <span asp-validation-for="Tipo" class="text-danger small"></span>
     </div>
-    <div class="mb-3"><label class="form-label">Género</label><input asp-for="Genero" class="form-control" /></div>
-    <div class="mb-3"><label class="form-label">Año de estreno</label><input asp-for="AnioEstreno" type="number" class="form-control" /></div>
-    <div class="mb-3"><label class="form-label">Plataforma</label><input asp-for="Plataforma" class="form-control" /></div>
-    <div class="mb-3"><label class="form-label">Estado</label>
+    <div class="mb-3">
+        <label class="form-label">Género</label>
+        <select asp-for="Genero" asp-items="Html.GetEnumSelectList<GeneroContenido>()" class="form-select"></select>
+        <span asp-validation-for="Genero" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Año de estreno</label>
+        <input asp-for="AnioEstreno" type="number" class="form-control" />
+        <span asp-validation-for="AnioEstreno" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Plataforma</label>
+        <select asp-for="Plataforma" asp-items="Html.GetEnumSelectList<PlataformaContenido>()" class="form-select"></select>
+        <span asp-validation-for="Plataforma" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
         <select asp-for="Estado" asp-items="Html.GetEnumSelectList<EstadoContenido>()" class="form-select"></select>
+        <span asp-validation-for="Estado" class="text-danger small"></span>
     </div>
-    <div class="mb-3"><label class="form-label">Calificación (1-5)</label>
+    <div class="mb-3">
+        <label class="form-label">Calificación (1-5)</label>
         <select asp-for="Calificacion" class="form-select">
             <option value="1">1</option><option value="2">2</option><option value="3">3</option>
             <option value="4">4</option><option value="5">5</option>
         </select>
+        <span asp-validation-for="Calificacion" class="text-danger small"></span>
     </div>
-    <div class="mb-3"><label class="form-label">Reseña breve</label><textarea asp-for="Resena" class="form-control" rows="3"></textarea></div>
+    <div class="mb-3">
+        <label class="form-label">Reseña breve</label>
+        <textarea asp-for="Resena" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Resena" class="text-danger small"></span>
+    </div>
 
     <button type="submit" class="btn btn-success">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -14,8 +14,8 @@ namespace CatalogoWeb.Data
         public ContenidoRepository()
         {
             // Datos de ejemplo para que el catálogo no inicie vacío
-            Agregar(new Contenido("Breaking Bad", TipoContenido.Serie, "Drama", 2008, "Netflix", EstadoContenido.Vista, 5, "Una obra maestra."));
-            Agregar(new Contenido("Inception", TipoContenido.Pelicula, "Ciencia ficción", 2010, "HBO Max", EstadoContenido.Pendiente, 4, "Pendiente de ver."));
+            Agregar(new Contenido("Breaking Bad", TipoContenido.Serie, GeneroContenido.Drama, 2008, PlataformaContenido.Netflix, EstadoContenido.Vista, 5, "Una obra maestra."));
+            Agregar(new Contenido("Inception", TipoContenido.Pelicula, GeneroContenido.CienciaFiccion, 2010, PlataformaContenido.Max, EstadoContenido.Pendiente, 4, "Pendiente de ver."));
         }
 
         public List<Contenido> ObtenerTodos() => _datos.ToList();

@@ -1,17 +1,45 @@
+/* ===== Tokens base (no cambian con el tema) ===== */
 :root {
-  --bg-base: #000000;
-  --bg-surface: #1c1c1e;
-  --bg-surface-2: #2c2c2e;
-  --cyan: #32ADE6;
-  --cyan-bright: #00d8ff;
-  --text-primary: #f5f5f7;
-  --text-secondary: #98989d;
-  --divider: rgba(255, 255, 255, 0.08);
   --radius-card: 18px;
   --radius-pill: 980px;
 }
 
-html { color-scheme: dark; } /* selects, scrollbars y date pickers nativos en oscuro */
+/* ===== Tema oscuro (por defecto) ===== */
+:root,
+[data-theme="dark"] {
+  --bg-base: #000000;
+  --bg-surface: #1c1c1e;
+  --bg-surface-2: #2c2c2e;
+  --text-primary: #f5f5f7;
+  --text-secondary: #98989d;
+  --divider: rgba(255, 255, 255, 0.08);
+  --cyan: #32ADE6;
+  --cyan-bright: #00d8ff;
+  --cyan-rgb: 50, 173, 230;
+  --cyan-contrast: #001016;
+  --danger: #ff6961;
+  --danger-contrast: #1c0000;
+  --navbar-glass: rgba(28, 28, 30, 0.72);
+  color-scheme: dark;
+}
+
+/* ===== Tema claro ===== */
+[data-theme="light"] {
+  --bg-base: #ffffff;
+  --bg-surface: #f5f5f7;
+  --bg-surface-2: #e8e8ed;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --divider: rgba(0, 0, 0, 0.08);
+  --cyan: #007aa3;
+  --cyan-bright: #00607f;
+  --cyan-rgb: 0, 122, 163;
+  --cyan-contrast: #ffffff;
+  --danger: #d70015;
+  --danger-contrast: #ffffff;
+  --navbar-glass: rgba(255, 255, 255, 0.72);
+  color-scheme: light;
+}
 
 html, body {
   background-color: var(--bg-base);
@@ -19,6 +47,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 17px;
   letter-spacing: -0.01em;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; }
@@ -27,18 +56,63 @@ h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; }
 a { color: var(--cyan); text-decoration: none; }
 a:hover { color: var(--cyan-bright); }
 
-/* Navbar — efecto vidrio esmerilado, el elemento firma del diseño */
+/* Navbar */
 .navbar, .navbar.bg-white {
-  background-color: rgba(28, 28, 30, 0.72) !important;
+  background-color: var(--navbar-glass) !important;
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--divider) !important;
   box-shadow: none !important;
 }
-.navbar-brand, .nav-link.text-dark { color: var(--text-primary) !important; }
-.nav-link.text-dark:hover, .nav-link.active { color: var(--cyan) !important; }
+.navbar-brand {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+  font-size: 19px;
+}
+.navbar-nav .nav-link {
+  color: var(--text-secondary) !important;
+  padding: 0.45rem 1rem !important;
+  border-radius: var(--radius-pill);
+  margin: 0 0.15rem;
+  font-weight: 500;
+}
+.navbar-nav .nav-link:hover { color: var(--text-primary) !important; }
+.navbar-nav .nav-link.active {
+  background-color: rgba(var(--cyan-rgb), 0.16);
+  color: var(--cyan) !important;
+}
 
-/* Cards (usadas en Estadísticas) */
+.navbar-toggler { border: 1px solid var(--divider); }
+.navbar-toggler:focus { box-shadow: 0 0 0 3px rgba(var(--cyan-rgb), 0.25); }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245,245,247,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+[data-theme="light"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(29,29,31,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Botón de cambio de tema */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--divider);
+  background-color: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.theme-toggle-btn:hover { background-color: var(--bg-surface-2); color: var(--text-primary); }
+.theme-toggle-btn:active { transform: scale(0.92); }
+.theme-toggle-btn svg { width: 18px; height: 18px; }
+.theme-toggle-btn #icon-sun { display: none; }
+[data-theme="light"] .theme-toggle-btn #icon-sun { display: inline-flex; }
+[data-theme="light"] .theme-toggle-btn #icon-moon { display: none; }
+
+/* Cards */
 .card {
   background-color: var(--bg-surface);
   border: 1px solid var(--divider);
@@ -54,39 +128,50 @@ a:hover { color: var(--cyan-bright); }
 }
 .display-6 { color: var(--text-primary); font-weight: 700; }
 
-/* Tabla del catálogo */
+/* Tabla */
 .table {
   --bs-table-bg: transparent;
   color: var(--text-primary);
   border-color: var(--divider);
 }
-.table-striped > tbody > tr:nth-of-type(odd) > * {
-  background-color: var(--bg-surface);
+
+/* Asegurar el color de texto en TODAS las celdas */
+.table tbody td, 
+.table tbody th {
   color: var(--text-primary);
 }
-.table-hover > tbody > tr:hover > * { background-color: var(--bg-surface-2); }
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: var(--bg-surface);
+  /* Ya no necesitas el color aquí porque la regla de arriba lo cubre */
+}
+
+.table-hover > tbody > tr:hover > * { 
+  background-color: var(--bg-surface-2); 
+}
+
 .table thead th {
   color: var(--text-secondary);
   font-weight: 600;
   border-bottom: 1px solid var(--divider);
 }
 
-/* Botones minimalistas tipo pill */
+/* Botones */
 .btn {
   border-radius: var(--radius-pill);
   font-weight: 600;
   padding: 0.55rem 1.4rem;
   border: none;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
 }
 .btn:active { transform: scale(0.96); }
 .btn-sm { padding: 0.35rem 0.9rem; font-size: 13px; }
 
 .btn-primary, .btn-success {
   background-color: var(--cyan);
-  color: #001016;
+  color: var(--cyan-contrast);
 }
-.btn-primary:hover, .btn-success:hover { background-color: var(--cyan-bright); color: #001016; }
+.btn-primary:hover, .btn-success:hover { background-color: var(--cyan-bright); color: var(--cyan-contrast); }
 
 .btn-secondary {
   background-color: var(--bg-surface-2);
@@ -99,7 +184,7 @@ a:hover { color: var(--cyan-bright); }
   color: var(--cyan);
   border: 1px solid var(--cyan);
 }
-.btn-outline-primary:hover, .btn-outline-success:hover { background-color: var(--cyan); color: #001016; }
+.btn-outline-primary:hover, .btn-outline-success:hover { background-color: var(--cyan); color: var(--cyan-contrast); }
 
 .btn-outline-secondary {
   background-color: transparent;
@@ -108,11 +193,11 @@ a:hover { color: var(--cyan-bright); }
 }
 .btn-outline-secondary:hover { background-color: var(--bg-surface-2); color: var(--text-primary); }
 
-.btn-outline-danger { background-color: transparent; color: #ff6961; border: 1px solid #ff6961; }
-.btn-outline-danger:hover { background-color: #ff6961; color: #1c0000; }
+.btn-outline-danger { background-color: transparent; color: var(--danger); border: 1px solid var(--danger); }
+.btn-outline-danger:hover { background-color: var(--danger); color: var(--danger-contrast); }
 
-/* Badges de estado (Vista / Pendiente) */
-.badge.bg-success { background-color: var(--cyan) !important; color: #001016 !important; }
+/* Badges */
+.badge.bg-success { background-color: var(--cyan) !important; color: var(--cyan-contrast) !important; }
 .badge.bg-warning {
   background-color: var(--bg-surface-2) !important;
   color: var(--text-secondary) !important;
@@ -130,7 +215,7 @@ a:hover { color: var(--cyan-bright); }
 .form-control:focus, .form-select:focus {
   background-color: var(--bg-surface);
   border-color: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(50, 173, 230, 0.25);
+  box-shadow: 0 0 0 3px rgba(var(--cyan-rgb), 0.25);
   color: var(--text-primary);
 }
 .form-label {
@@ -141,8 +226,8 @@ a:hover { color: var(--cyan-bright); }
   letter-spacing: 0.03em;
 }
 
-/* Accesibilidad: foco visible y respeto a "reducir movimiento" */
-.btn:focus-visible, a:focus-visible, .form-control:focus-visible {
+/* Accesibilidad */
+.btn:focus-visible, a:focus-visible, .form-control:focus-visible, .theme-toggle-btn:focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 2px;
 }
@@ -150,48 +235,14 @@ a:hover { color: var(--cyan-bright); }
   * { transition: none !important; }
 }
 
-.footer, .footer.text-muted {
+/* Footer */
+footer, footer.text-muted {
   background-color: var(--bg-base) !important;
   color: var(--text-secondary) !important;
   border-top: 1px solid var(--divider) !important;
-}
-.footer a {
-  color: var(--cyan);
-}
-.footer a:hover {
-  color: var(--cyan-bright);
-}
-.navbar-nav .nav-link {
-  padding: 0.45rem 1rem !important;
-  border-radius: var(--radius-pill);
-  margin: 0 0.15rem;
-  font-weight: 500;
-}
-.navbar-nav .nav-link.active {
-  background-color: rgba(50, 173, 230, 0.16);
-  color: var(--cyan) !important;
-}
-.navbar-brand {
-  font-weight: 700;
-  font-size: 19px;
-}
+  position: static !important; 
+  padding: 20px 0; 
 
-/* El ícono de hamburguesa por defecto es oscuro; lo recoloreamos para que se vea sobre fondo negro */
-.navbar-toggler {
-  border: 1px solid var(--divider);
 }
-.navbar-toggler:focus { box-shadow: 0 0 0 3px rgba(50, 173, 230, 0.25); }
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245,245,247,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.navbar-nav .nav-link {
-  color: var(--text-secondary) !important;
-}
-.navbar-nav .nav-link:hover {
-  color: var(--text-primary) !important;
-}
-.navbar-nav .nav-link.active {
-  color: var(--cyan) !important;
-}
-
+footer a { color: var(--cyan); }
+footer a:hover { color: var(--cyan-bright); }

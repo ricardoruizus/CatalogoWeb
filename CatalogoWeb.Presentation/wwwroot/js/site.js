@@ -1,4 +1,24 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿(function () {
+  var btn = document.getElementById('theme-toggle');
+  var metaTheme = document.getElementById('meta-theme-color');
+  if (!btn) return;
 
-// Write your JavaScript code.
+  function applyMeta(theme) {
+    if (metaTheme) metaTheme.setAttribute('content', theme === 'light' ? '#ffffff' : '#000000');
+  }
+  function applyLabel(theme) {
+    btn.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  }
+
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyMeta(current);
+  applyLabel(current);
+
+  btn.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('catalogoweb-theme', next);
+    applyMeta(next);
+    applyLabel(next);
+  });
+})();

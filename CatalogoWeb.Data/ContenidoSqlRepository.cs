@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CatalogoWeb.Entities;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace CatalogoWeb.Data
 {
@@ -36,9 +38,22 @@ namespace CatalogoWeb.Data
 
         public void Actualizar(Contenido contenido)
         {
+            // 1. Buscamos si EF ya tiene guardado en memoria algo con ese mismo Id
+            var local = _context.Contenidos
+            .Local
+            .FirstOrDefault(entry => entry.Id == contenido.Id);
+
+            // 2. Si lo encuentra, le decimos que se despegue (Detached) para liberar el Id
+            if (local != null)
+                {
+                    _context.Entry(local).State = EntityState.Detached;
+                }
+
+            // 3. Ahora que el Id está libre en memoria, actualizamos y guardamos
             _context.Contenidos.Update(contenido);
-            _context.SaveChanges();
-        }
+            _context.SaveChanges(); // Asegúrate de que tenga el SaveChanges() para guardar en la base de datos
+        }   
+
 
         public void Eliminar(int id)
         {
